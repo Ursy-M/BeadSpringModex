@@ -40,10 +40,10 @@ def stretching_forces_numba(X, a, coef_stretching, N_bead_obs):
     # get the stretching modulus
     xi_0 = coef_stretching
     # define the vector force
-    F = np.zeros((N, 3))
+    F = np.zeros((N, 3), dtype = float)
     
     # compute the forces
-    for ii in prange(Nb):
+    for ii in range(Nb):
         if ii>0:
             # compute the variation of postion between beads i - 1 and i
             rim_i_vec =   X[ii - 1, :] - X[ii, :]
