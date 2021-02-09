@@ -22,7 +22,7 @@ from solver import solver as sv
 
 startTime = datetime.now()
 
-#load  input file
+# load  input file
 f = np.loadtxt("inputdata.csv", skiprows=1, delimiter = ";", dtype=str)
 
 
@@ -30,7 +30,7 @@ current_directory = os.getcwd()
 path = 'outputdata'
 directory = current_directory + '/' + path + '/'
 
-#parameters
+# parameters
 # fiber data
 # fiber bead radius 
 a = float(f[0])
@@ -57,7 +57,7 @@ coef_stretching = S / (2 * a)
 # bending coefficient
 coef_bending = B / (2 * a)
 
-#radius array
+# radius array
 radi_vec = np.ones(Nb)
 radi_vec = a * radi_vec
 
@@ -126,14 +126,14 @@ def bead_velocities(t, X, args):
 y, V_fiber, all_t = sv.BDF_method(bead_velocities, initial_values, t, dt, \
                                   V_fiber, Nb, V, args)
     
-#create new directory
+# create new directory
 if not os.path.exists(path):
     os.mkdir(path)
 else :
     shutil.rmtree(path)
     os.mkdir(path)
 
-#save output data
+# save output data
 np.savetxt(directory + "outputpositions.csv", y, delimiter=";")
 np.savetxt(directory + "outputvelocities.csv", V_fiber, delimiter=";")
 np.savetxt(directory + "outputtime.csv", all_t, delimiter=";" )

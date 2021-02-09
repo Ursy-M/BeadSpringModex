@@ -45,7 +45,7 @@ mu = float(f[2])
 # weight per unit length                                                     
 W = float(f[3])
 # setling time
-unit_time_gravity = LS * mu / W
+unit_time_sedimentation = LS * mu / W
 
 # define the domain
 Lim = 0.5
@@ -124,7 +124,7 @@ with writer.saving(fig, directory + "Movie.mp4", 100):
             ax.set_yticks([-Lim, 0, Lim])
             ax.set_xlabel(r'$(x - x_{mean})/L$', fontsize=20)
             ax.set_ylabel(r'$(y - y_{mean})/L$', fontsize=20)
-            ax.set_title(r'$t/T=$' + str(int(tk[k]/unit_time_gravity)), fontsize=20)
+            ax.set_title(r'$t/T=$' + str(int(tk[k]/unit_time_sedimentation)), fontsize=20)
             
             plt.draw()
             plt.pause(0.02)
