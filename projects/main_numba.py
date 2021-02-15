@@ -140,3 +140,30 @@ np.savetxt(directory + "outputtime.csv", all_t, delimiter=";" )
 
 duration =  datetime.now() - startTime   
 print("time :\t" + "execution\t" + str(duration))
+
+
+liste_BE = []
+i=1
+while i <=3 :
+    liste_2 = [(x+1)*10**i for x in range(10) ]
+    liste_BE = liste_BE + liste_2
+    i=i+1
+    
+  
+liste_BE = []
+i=1
+while i <=3 :
+    liste_2 = [(x+1)*10**i for x in range(10) ]
+    liste_BE = liste_BE + liste_2
+    i=i+1
+
+final_deflection = 100
+def_rel =100
+for Be in liste_BE :
+    while abs(def_rel)>10**-3:
+        y_min = min(y)
+        y_max = max(y)
+        deflection_new = y_max - y_min
+        def_rel = final_deflection -deflection_new  
+        final_deflection = deflection_new
+    
