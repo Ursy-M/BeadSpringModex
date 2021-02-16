@@ -37,11 +37,11 @@ directory = current_directory + '/' + path + '/'
 path_snap = 'snapshots'
 directory_snap = directory + path_snap + '/'
 
-if not os.path.exists(path_snap):
-    os.mkdir(path_snap)
+if not os.path.exists(directory_snap):
+    os.mkdir(directory_snap)
 else:
-    shutil.rmtree(path_snap)
-    os.mkdir(path_snap)
+    shutil.rmtree(directory_snap)
+    os.mkdir(directory_snap)
 
 
 

@@ -19,7 +19,6 @@ from mobility_numba import mobility_numba as mob
 from forces_numba import forces_numba as fo
 from solver import solver as sv
 
-
 startTime = datetime.now()
 
 # load  input file
@@ -142,20 +141,20 @@ duration =  datetime.now() - startTime
 print("time :\t" + "execution\t" + str(duration))
 
 
-liste_BE = []
-i=1
-while i <=3 :
-    liste_2 = [(x+1)*10**i for x in range(10) ]
-    liste_BE = liste_BE + liste_2
-    i=i+1
+
     
-  
 liste_BE = []
 i=1
-while i <=3 :
-    liste_2 = [(x+1)*10**i for x in range(10) ]
+while i<=3 :
+    liste_2 = [(x+1)*10**i for x in range(9)]
     liste_BE = liste_BE + liste_2
     i=i+1
+
+
+
+
+
+
 
 final_deflection = 100
 def_rel =100
@@ -164,6 +163,6 @@ for Be in liste_BE :
         y_min = min(y)
         y_max = max(y)
         deflection_new = y_max - y_min
-        def_rel = final_deflection -deflection_new  
+        def_rel = final_deflection - deflection_new  
         final_deflection = deflection_new
     
