@@ -72,7 +72,6 @@ all_deflection = list()
 while k < (TOTAL_STEPS - 1) and deflection_relative > eps :
     for k in range(1,TOTAL_STEPS - 1):
         deflection_anterieur = deflection
-        print("ok")
     #    if deflection_relative == 0.0 :
     #        k += 1
     #    else :
