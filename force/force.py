@@ -6,10 +6,6 @@ Module which contains functions to define forces applied on the beads.
 import numpy as np
 
 
-# import project functions and modules
-from fiber import fiber
-
-
 def set_steric_forces(implementation):
     """
     set the function to compute the bead-bead forces to the right function.
