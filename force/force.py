@@ -4,7 +4,18 @@ Module which contains functions to define forces applied on the beads.
 """
 
 import numpy as np
+import imp
 
+# if numba is installed import forces_numba
+try:
+    imp.find_module('numba')
+    found_numba = True
+except ImportError:
+    found_numba = False
+if found_numba:
+    from force import force_numba
+        
+    
 
 def set_steric_forces(implementation):
     """
@@ -18,7 +29,7 @@ def set_steric_forces(implementation):
     elif implementation == 'python':
         return calc_steric_forces_python
     elif implementation == 'numba':
-        return calc_steric_forces_numba
+        return force_numba.calc_steric_forces_numba
     elif implementation == 'pycuda':
         return calc_steric_forces_pycuda
     
@@ -151,26 +162,16 @@ def calc_steric_forces_python(r_vectors, *args, **kwargs):
             iw = bead_list_index[i]
             jw = bead_list_index[j]
             if i==j:
-                force = 0.0
+                continue
             elif abs(i-j)==1 and iw==jw:
-                force = 0.0
-            else:
-                # compute the center - center vector
-                r = r_vectors[j] - r_vectors[i]
-                force = bead_bead_force(r, i, j, *args, **kwargs)
-            forces[i] += force
-            forces[j] -= force
-    
-    return forces
+                continue
 
-    
-def calc_steric_forces_numba(r_vectors, *args, **kwargs):
-    
-    # get number of beads
-    number_of_beads = r_vectors.size // 3
-    # set the vector force
-    forces = np.zeros((number_of_beads, 3))
-    
+            # compute the center - center vector
+            r = r_vectors[j] - r_vectors[i]
+            force = bead_bead_force(r, i, j, *args, **kwargs)
+            
+            forces[i] += force
+            
     return forces
 
 

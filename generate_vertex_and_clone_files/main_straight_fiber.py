@@ -8,11 +8,16 @@ import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import rc
-#rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
-## for Palatino and other serif fonts use:
-rc('font',**{'family':'serif','serif':['Times']})
-rc('text', usetex=True)
+
+try:
+    from matplotlib import rc
+    #rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
+    ## for Palatino and other serif fonts use:
+    rc('font',**{'family':'serif','serif':['Times']})
+    rc('text', usetex=True)
+except ImportError:
+    print('You don’t have a working LaTeX installation on your computer or the required files are not in your system environment variables.')
+
 
 plt.rc('xtick',labelsize=20)
 plt.rc('ytick',labelsize=20)

@@ -35,7 +35,8 @@ class ReadInput(object):
                 
         
         # set option to file or default values
-        self.n_steps = int(self.options.get('n_steps') or 0)
+        self.n_settling_time = int(self.options.get('n_settling_time') or 1)
+        self.n_steps_per_unit_time = int(self.options.get('n_steps_per_unit_time') or 30)
         self.initial_step = int(self.options.get('initial_step') or 0)
         self.n_save = int(self.options.get('n_save') or 1)
         self.dt = float(self.options.get('dt') or 0.0)
@@ -50,13 +51,15 @@ class ReadInput(object):
         self.output_name = str(self.options.get('output_name') or 'output')
         self.save_velocities = str(self.options.get('save_velocities') or 'False')
         self.save_forces = str(self.options.get('save_forces') or 'False')
-        self.domain = str(self.options.get('domain') or 'free_space')
+        self.domain = str(self.options.get('domain') or 'no_wall')
         self.repulsion_strength = float(self.options.get('repulsion_strength') or 1.0)
         self.stiffness_paramater = float(self.options.get('stiffness_paramater') or 2.0)
         self.contact_distance_factor = float(self.options.get('contact_distance_factor') or 1.1)
         self.set_steric_forces_implementation = str(self.options.get('set_steric_forces_implementation') or 'python')
         self.periodic_length = np.fromstring(self.options.get('periodic_length') or '0 0 0', sep=' ')
         self.scheme = str(self.options.get('scheme') or 'BDF')
+        self.generate_vtk_files = str(self.options.get('generate_vtk_files') or 'False')
+        self.grid = np.fromstring(self.options.get('grid') or 'None', sep=' ')
         
         # create list with [vertex_file, clones_file]
         self.number_kind_of_free_bodies = number_kind_of_fibers

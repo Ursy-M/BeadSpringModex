@@ -14,12 +14,16 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.animation import FFMpegWriter
-from matplotlib import rc
-#rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
-## for Palatino and other serif fonts use:
-rc('font',**{'family':'serif','serif':['Times']})
-rc('text', usetex=True)
 
+try:
+    from matplotlib import rc
+    #rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
+    ## for Palatino and other serif fonts use:
+    rc('font',**{'family':'serif','serif':['Times']})
+    rc('text', usetex=True)
+except ImportError:
+    print('You don’t have a working LaTeX installation on your computer or the required files are not in your system environment variables.')
+   
 plt.rc('xtick',labelsize=20)
 plt.rc('ytick',labelsize=20)
 params = {'legend.fontsize': 20,
@@ -27,6 +31,7 @@ params = {'legend.fontsize': 20,
 plt.rcParams.update(params)
 
 plt.rcParams['animation.ffmpeg_path'] = '/usr/local/bin/ffmpeg';
+
 
 # =============================================================================
 # define some useful functions
@@ -81,7 +86,7 @@ eta = 1.0
 # weight per unit length                                                     
 W = 1.0
 # number of fibers
-n_fibers = 1
+n_fibers = 2
 
 # setling time
 unit_time_gravity = LS*eta/W
@@ -154,8 +159,8 @@ with writer.saving(fig, directory + "Movie.mov",100):
                 if n_fibers==1:
                     ax.plot((all_x - x_m),(all_z - z_m),'-')
                 elif n_fibers==2:
-                    ax.plot((all_x[:Nb] - x_m),(all_z[:Nb] - z_m),'-')
-                    ax.plot((all_x[Nb:] - x_m),(all_z[Nb:] - z_m),'-')
+                    ax.plot((all_x[:Nb] - x_m),(all_z[:Nb] - z_m),'-', color='gray')
+                    ax.plot((all_x[Nb:] - x_m),(all_z[Nb:] - z_m),'-', color='gray')
             elif plot_3d==True:
                 if n_fibers==1:
                     ax.plot3D((all_x - x_m), (all_y - y_m), (all_z - z_m),color='gray', linestyle='-')
@@ -187,7 +192,7 @@ with writer.saving(fig, directory + "Movie.mov",100):
                 ax.tick_params(axis = 'x', which='minor', direction = 'in', top = True)
                 ax.tick_params(axis = 'y', which='major', direction = 'in', right = True)
                 ax.tick_params(axis = 'y', which='minor', direction = 'in', right = True)
-                #ax.set_title(r'$t/T=$' + str(int(tk[k]/unit_time_gravity)), fontsize=20)
+                ax.set_title(r'$t/T= $' + '\t' + str(int(tk[k]/unit_time_gravity)), fontsize=20)
             elif plot_3d==True:
                 for ii in range(Ny):
                     max_step_theta = 2*np.pi

@@ -2,13 +2,13 @@
 scheme                              BDF
 
 # select the domain
-domain                              free_space
+domain                              no_wall
 
 # select implementation to compute M*f
 mobility_vector_prod_implementation numba
 
 # select implementation to compute steric interactions
-set_steric_forces_implementation    python
+set_steric_forces_implementation    numba
 
 # set parameters for the bead-bead interaction
 repulsion_strength                  1.0
@@ -16,10 +16,11 @@ stiffness_parameter                 2.0
 contact_distance_factor             1.1
 
 # set computation time
-n_steps                             10
+n_settling_time                     50
+n_steps_per_unit_time               30
 initial_step                        0
 n_save                              1
-dt                                  0.004
+dt                                  0.0015
 
 # set fluid porperties and some properties of fibers and obstacles
 eta                                 1.0
@@ -30,6 +31,10 @@ centerline_distance_factor          2.2
 
 # set output name
 output_name                         output/run
+
+# save velocities
+save_velocities                     True
+
 
 # load fiber and/or obstacle configurations
 fiber ../configurations/straight_fiber_N_20_DL_2.2.vertex ../configurations/straight_fiber_N_20_DL_2.2.clones

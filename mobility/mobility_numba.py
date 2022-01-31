@@ -1,6 +1,6 @@
 
 """
-Fluid mobility with numba
+Fluid mobility with numba (from Usabiaga et al(2016))
 """
 
 import numpy as np
@@ -15,8 +15,8 @@ except ImportError:
 @njit(parallel=True, fastmath=True)
 def no_wall_mobility_trans_times_force_numba(r_vectors, force, eta, a, L):
   ''' 
-  Returns the product of the mobility at the blob level to the force 
-  on the blobs. Mobility for particles in an unbounded domain, it uses
+  Returns the product of the mobility at the bead level to the force 
+  on the beads. Mobility for particles in an unbounded domain, it uses
   the standard RPY tensor.  
   
   This function uses numba.

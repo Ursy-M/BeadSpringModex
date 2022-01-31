@@ -2,7 +2,7 @@
 """
 main file to run a simultion with n fibers
 """
-
+import sys
 import numpy as np
 import argparse
 from scipy.integrate import ode
@@ -13,13 +13,28 @@ from datetime import datetime
 # =============================================================================
 # import project functions
 # =============================================================================
-from read_input import read_input
-from read_input import read_clone_file
-from read_input import read_vertex_file_list
-from fiber import fiber
-from integrator.integrator import Integrator
-from force import force
+# find project functions
+found_functions = False
+path_to_append = ''
+while found_functions is False:
+    try:    
+        from read_input import read_input
+        from read_input import read_clone_file
+        from read_input import read_vertex_file_list
+        from fiber import fiber
+        from integrator.integrator import Integrator
+        from force import force
 
+        found_functions = True
+    except ImportError as exc:
+        sys.stderr.write('Error: failed to import settings module ({})\n'.format(exc))
+        path_to_append += '../'
+        print('searching functions in path ', path_to_append)
+        sys.path.append(path_to_append)
+        if len(path_to_append) > 21:
+            print('\nProject functions not found. Edit path in main_multi_fibers.py or check PYTHONPATH')
+            sys.exit()
+        
 # =============================================================================
 # define modules
 # =============================================================================
@@ -76,7 +91,7 @@ def get_beads_list_indices(bodies_fibers):
 # main
 # =============================================================================
 # get command line
-parser = argparse.ArgumentParser(description='run a multi_fibers_and_obstacles simulation and save trajectory.')
+parser = argparse.ArgumentParser(description='run a multi_fibers simulation and save trajectory.')
 parser.add_argument('--input-file', dest='input_file', type=str, default='data.main', help='name of the input file')
 args = parser.parse_args()
 input_file = args.input_file
@@ -85,8 +100,9 @@ input_file = args.input_file
 read = read_input.ReadInput(input_file)
 
 # set some useful entries for the simualtion
-n_steps = read.n_steps
+n_settling_time = read.n_settling_time
 initial_step = read.initial_step
+n_steps_per_unit_time = read.n_steps_per_unit_time
 n_save = read.n_save
 dt = read.dt
 eta = read.eta
@@ -181,11 +197,13 @@ integrator.number_of_beads_fiber         = number_of_beads_fiber
 
 
 # ode solver
-t = np.arange(initial_step, n_steps, dt)                                
+final_step = n_settling_time * n_steps_per_unit_time * dt
+t = np.arange(initial_step, final_step, dt)                                
 r = ode(integrator)
 r.set_integrator('vode', method=read.scheme, with_jacobian=True)
 r.set_initial_value(initial_values, initial_step)
 sol = np.zeros((len(t), len(initial_values)))
+sol_velocities = np.zeros((len(t), len(initial_values)))
 all_t = np.zeros((len(t), 1))
 idx = 0
 
@@ -193,8 +211,11 @@ idx = 0
 start_time = datetime.now()
 while r.successful() and r.t < t[-1]:
     print('integrator = ', read.scheme, ', step = ', idx,  ', t + dt = ', r.t + dt)
-    sol[idx, :] = r.y
-    all_t[idx, :] = t[idx]
+    if idx % n_save == 0 and idx >= 0 :
+        sol[idx, :] = r.y 
+        all_t[idx, :] = t[idx]
+        if read.save_velocities == 'True':
+            sol_velocities[idx, :] = integrator.velocities
     r.integrate(r.t + dt)
     idx += 1
 
@@ -202,7 +223,9 @@ while r.successful() and r.t < t[-1]:
 # save
 np.savetxt(output_name + ".output_positions.csv", sol, delimiter=';')
 np.savetxt(output_name + ".output_times.csv", all_t, delimiter=';')
-
+if read.save_velocities == 'True':
+    np.savetxt(output_name + ".output_velocities.csv", sol_velocities, delimiter=';')
+    
     
 duration = datetime.now() - start_time
 print('time :\t' + 'execution\t' + str(duration))

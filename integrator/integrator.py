@@ -24,16 +24,17 @@ class Integrator(object):
         self.eta = None
         self.a_bead_fib = None
         self.weight_per_unit_length = None
-        self.velocities = None
+        self.velocities = np.zeros((1, 3*self.number_of_beads))
         self.periodic_length = None
         self.number_of_beads_fiber = None
+        
         
         if self.domain == 'single_wall':
             if mobility_vector_prod_implementation.find('pycuda') > -1:
                 self.mobility_trans_times_force = mob.single_wall_mobility_trans_times_force_pycuda
             elif mobility_vector_prod_implementation.find('numba') > -1:
                 self.mobility_trans_times_force = mob.single_wall_mobility_trans_times_force_numba
-        elif self.domain == 'free_space':
+        elif self.domain == 'no_wall':
             if mobility_vector_prod_implementation.find('pycuda') > -1:
                 self.mobility_trans_times_force = mob.no_wall_mobility_trans_times_force_pycuda
             elif mobility_vector_prod_implementation.find('numba') > -1:
@@ -134,7 +135,10 @@ class Integrator(object):
         # solve the mobility problem
         sol = self.solve_mobility_problem()
         
-        return np.squeeze(np.asarray(sol.reshape(1, 3*self.number_of_beads)))
+        
+        self.velocities = np.squeeze(np.asarray(sol.reshape(1, 3*self.number_of_beads)))
+        
+        return self.velocities
         
         
              
