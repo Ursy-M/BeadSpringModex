@@ -1,0 +1,28 @@
+# select the domain
+domain                              no_wall
+
+# select implementation to compute M*f
+mobility_vector_prod_implementation numba
+
+# set computation time
+n_settling_time                     50
+n_steps_per_unit_time               30
+initial_step                        0
+n_save                              1
+
+# set fluid porperties and some properties of fibers and obstacles
+eta                                 1.0
+fiber_bead_radius                   1e-3
+tracer_radius                       0.0
+
+# generate .vtk files
+generate_vtk_files                  False
+
+# grid data
+grid                 
+
+# set output name
+output_name                         run
+
+
+
