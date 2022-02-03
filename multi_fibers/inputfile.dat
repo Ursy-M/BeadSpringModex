@@ -16,13 +16,13 @@ stiffness_parameter                 2.0
 contact_distance_factor             1.1
 
 # set computation time
-n_settling_time                     50
+n_settling_time                     10
 n_steps_per_unit_time               30
 initial_step                        0
 n_save                              1
 dt                                  0.0015
 
-# set fluid porperties and some properties of fibers and obstacles
+# set fluid porperties and some properties of fibers
 eta                                 1.0
 weight_per_unit_length              1.0
 elasto_gravitational_number         1e+03
@@ -35,6 +35,8 @@ output_name                         output/run
 # save velocities
 save_velocities                     True
 
+# save forces
+save_forces                         True
 
 # load fiber and/or obstacle configurations
 fiber ../configurations/straight_fiber_N_20_DL_2.2.vertex ../configurations/straight_fiber_N_20_DL_2.2.clones

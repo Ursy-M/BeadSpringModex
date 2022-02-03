@@ -25,6 +25,7 @@ class Integrator(object):
         self.a_bead_fib = None
         self.weight_per_unit_length = None
         self.velocities = np.zeros((1, 3*self.number_of_beads))
+        self.forces = np.zeros((1, 3*self.number_of_beads))
         self.periodic_length = None
         self.number_of_beads_fiber = None
         
@@ -111,6 +112,9 @@ class Integrator(object):
                                               self.bodies_fibers)               
         
         force = np.reshape(force, force.size)
+        
+        # update forces
+        self.forces = force
         
         # compute velocities --> M*F
         sol = self.mobility_matrix(force,

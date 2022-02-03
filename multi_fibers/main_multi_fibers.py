@@ -204,6 +204,7 @@ r.set_integrator('vode', method=read.scheme, with_jacobian=True)
 r.set_initial_value(initial_values, initial_step)
 sol = np.zeros((len(t), len(initial_values)))
 sol_velocities = np.zeros((len(t), len(initial_values)))
+sol_forces = np.zeros((len(t), len(initial_values)))
 all_t = np.zeros((len(t), 1))
 idx = 0
 
@@ -216,6 +217,8 @@ while r.successful() and r.t < t[-1]:
         all_t[idx, :] = t[idx]
         if read.save_velocities == 'True':
             sol_velocities[idx, :] = integrator.velocities
+        if read.save_forces == 'True':
+            sol_forces[idx, :] = integrator.forces
     r.integrate(r.t + dt)
     idx += 1
 
@@ -225,6 +228,8 @@ np.savetxt(output_name + ".output_positions.csv", sol, delimiter=';')
 np.savetxt(output_name + ".output_times.csv", all_t, delimiter=';')
 if read.save_velocities == 'True':
     np.savetxt(output_name + ".output_velocities.csv", sol_velocities, delimiter=';')
+if read.save_forces == 'True':
+    np.savetxt(output_name + ".output_forces.csv", sol_forces, delimiter=';')
     
     
 duration = datetime.now() - start_time

@@ -5,7 +5,7 @@ domain                              no_wall
 mobility_vector_prod_implementation numba
 
 # set computation time
-n_settling_time                     50
+n_settling_time                     10
 n_steps_per_unit_time               30
 initial_step                        0
 n_save                              1
@@ -19,7 +19,7 @@ tracer_radius                       0.0
 generate_vtk_files                  False
 
 # grid data
-grid                 
+grid                                -0.2 0.2 1000 0.00001 0.00001 1 -0.2 0.2 1000               
 
 # set output name
 output_name                         run

@@ -170,8 +170,6 @@ n_steps = n_steps_per_unit_time * n_settling_time
 a_bead_fib = read.fiber_bead_radius
 tracer_radius = read.tracer_radius
 eta = read.eta
-mobility_vector_prod_implementation = read.mobility_beads_implementation
-domain = read.domain
 output_name = read.output_name
 generate_vtk_files = read.generate_vtk_files
 grid = read.grid
@@ -192,12 +190,11 @@ forces = np.loadtxt(directory + 'run.output_forces.csv', delimiter=';')
 number_of_beads = positions.shape[1] // 3
 
 # loop over time steps
-start_time = datetime.now
+start_time = datetime.now()
 for step in range(n_steps):
     if step % n_save == 0 and step >=0:
-        elapsed_time = datetime.now - start_time
-        print('number of steps = ', step)
-        print('step = ', step, ', wallclock = ', elapsed_time)
+        print('number of steps = ', n_steps)
+        print('step = ', step+1, ', wallclock time = ', datetime.now() - start_time)
         
         all_position_x = []
         all_position_y = []
@@ -229,8 +226,8 @@ for step in range(n_steps):
                                             a_bead_fib, 
                                             tracer_radius, 
                                             eta,
-                                            mobility_vector_prod_implementation,
-                                            domain)
+                                            mobility_vector_prod_implementation=read.mobility_vector_prod_implementation,
+                                            domain=read.domain)
             
         if generate_vtk_files == 'True':
             # prepare data for VTK writer
@@ -266,6 +263,10 @@ for step in range(n_steps):
             name = directory_grid_velocity + output_name + '.velocity_field_' + str(step) + '.csv'
             np.savetxt(name, grid_velocity, delimiter=';')
             
+
+# save grid coordinates
+filename = directory_grid_velocity + output_name + '.grid_coordinates.csv'
+np.savetxt(filename, grid_coordinates, delimiter=';')
             
 duration = datetime.now() - start_time
 print('time :\t' + 'execution\t' + str(duration))            
