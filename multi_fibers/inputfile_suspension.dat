@@ -36,7 +36,7 @@ periodic_length                     0.88    0.  0.88
 output_name                         output/run
 
 # save velocities
-save_velocities                     True
+save_velocities                     False
 
 
 # load fiber and/or obstacle configurations

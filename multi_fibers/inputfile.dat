@@ -33,10 +33,10 @@ centerline_distance_factor          2.2
 output_name                         output/run
 
 # save velocities
-save_velocities                     True
+save_velocities                     False
 
 # save forces
-save_forces                         True
+save_forces                         False
 
 # load fiber and/or obstacle configurations
 fiber ../configurations/straight_fiber_N_20_DL_2.2.vertex ../configurations/straight_fiber_N_20_DL_2.2.clones

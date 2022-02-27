@@ -262,7 +262,7 @@ def no_wall_mobility_trans_times_force_pycuda(r_vectors, force, eta, a, *args, *
     """ from P. J. Zuk, E. Wajnryb, K. A. Mizerski and P. Szymczak's paper """
     
     # set the number of threads and blocks
-    number_of_beads = np.int32(len(r_vectors))
+    number_of_beads = len(r_vectors)
     threads_per_block, num_blocks = set_number_of_threads_and_blocks(number_of_beads)
     
     # reshape arrays
