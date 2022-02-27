@@ -4,12 +4,27 @@ Small script  file to generate .vertex and .clone files for a random suspension 
 in a quasi 2D square lattice.
 """
 
+import sys
 import numpy as np
 import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from quaternion.quaternion import Quaternion
 
+# find project functions
+found_functions = False
+path_to_append = ''
+while found_functions is False:
+    try:    
+        from quaternion.quaternion import Quaternion
+        found_functions = True
+    except ImportError as exc:
+        sys.stderr.write('Error: failed to import settings module ({})\n'.format(exc))
+        path_to_append += '../'
+        print('searching functions in path ', path_to_append)
+        sys.path.append(path_to_append)
+        if len(path_to_append) > 21:
+            print('\nProject functions not found. Edit path in main_random_suspension_fiber.py or check PYTHONPATH')
+            sys.exit()
 try:
     from matplotlib import rc
     #rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
@@ -143,5 +158,5 @@ for i in range(number_of_beads_per_fiber):
     ff.write(directory + '/' + 'bead.vertex' + '\n')
 
 ff.close()    
-
+plt.show()
    
