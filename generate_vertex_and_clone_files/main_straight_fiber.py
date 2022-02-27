@@ -8,6 +8,8 @@ import matplotlib
 #matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from quaternion.quaternion import Quaternion
+
 
 try:
     from matplotlib import rc
@@ -63,9 +65,9 @@ def set_axes_equal(ax):
 # =============================================================================
 # set entries
 a_bead_fiber = 1e-3
-dist_factor = 2.2
+dist_factor = 2.0
 dist = dist_factor * a_bead_fiber
-number_of_beads_per_fiber = 20
+number_of_beads_per_fiber = 50
 length = number_of_beads_per_fiber * dist
 dz_between_fibers = 10 * a_bead_fiber
 n_fibers = 1
@@ -79,6 +81,25 @@ coordinates[0:number_of_beads_per_fiber,0]= np.arange(0, number_of_beads_per_fib
 if n_fibers ==2:
     coordinates[number_of_beads_per_fiber:,0] = np.arange(0, number_of_beads_per_fiber, 1) * dist
     coordinates[number_of_beads_per_fiber:,2] = dz_between_fibers * np.ones(number_of_beads_per_fiber)
+
+
+
+# set position and orientation (and define the center of mass at [0., 0., 0.])
+center_of_mass = [np.mean(coordinates[:,0]), np.mean(coordinates[:,1]), np.mean(coordinates[:,2])]
+center_of_mass = np.array(center_of_mass) 
+coordinates = coordinates - center_of_mass
+
+# define the orientation
+ref_configuration = np.copy(coordinates)
+factor = 3/4
+s = np.array([np.cos(factor*np.pi/2)])
+p = np.sin(factor*np.pi/2) * np.array([0., factor*np.pi, 0.]) / np.linalg.norm(np.array([0., factor*np.pi, 0.]))
+q = np.concatenate([s, p])
+orientation = Quaternion(q)
+
+rotation_matrix = orientation.rotation_matrix()
+coordinates =  np.dot(ref_configuration, rotation_matrix.T)
+
 
 # plot
 plot_3d = False
@@ -143,7 +164,6 @@ elif plot_3d == False:
         fig.tight_layout()
 
 # save 
-# set position and orientation
 pos_fiber = coordinates
 # generate clones files
 filename = "straight_fiber_N_" + str(number_of_beads_per_fiber) + "_DL_" + str(dist_factor)
@@ -163,4 +183,5 @@ ff = open(directory + "/" + filename + ".vertex", 'w')
 for i in range(number_of_beads_per_fiber):
     ff.write(directory + '/' + 'bead.vertex' + '\n')
 
-ff.close()        
+ff.close()
+plt.show()

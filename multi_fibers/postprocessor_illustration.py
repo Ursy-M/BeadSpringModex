@@ -78,15 +78,15 @@ directory = current_directory + '/' + path + '/'
 # fiber bead radius 
 a = 1e-03                                              
 # number of fiber beads                                                    
-Nb = 20
+Nb = 50
 # length                                 
-LS = Nb*2.2*a
+LS = Nb*2.0*a
 # viscosity
 eta = 1.0
 # weight per unit length                                                     
 W = 1.0
 # number of fibers
-n_fibers = 2
+n_fibers = 1
 
 # setling time
 unit_time_gravity = LS*eta/W

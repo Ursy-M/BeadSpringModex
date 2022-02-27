@@ -211,8 +211,8 @@ idx = 0
 # loop over time steps
 start_time = datetime.now()
 while r.successful() and r.t < t[-1]:
-    print('integrator = ', read.scheme, ', step = ', idx,  ', t + dt = ', r.t + dt)
     if idx % n_save == 0 and idx >= 0 :
+        print('integrator = ', read.scheme, ', step = ', idx+1,  ', t + dt = ', r.t + dt)
         sol[idx, :] = r.y 
         all_t[idx, :] = t[idx]
         if read.save_velocities == 'True':
