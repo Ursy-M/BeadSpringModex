@@ -3,13 +3,28 @@
 Small script  file to generate .vertex and .clone files for a straight fiber.
 """
 
+import sys
 import numpy as np
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from quaternion.quaternion import Quaternion
 
+# try to import some useful modules
+found_function = False
+path_to_append = ''
+while found_function is False:
+    try:    
+        from quaternion.quaternion import Quaternion
+        found_function = True
+    except ImportError as exc:
+        sys.stderr.write('Error: failed to import settings module ({})\n'.format(exc))
+        path_to_append += '../'
+        print('searching function in path ', path_to_append)
+        sys.path.append(path_to_append)
+        if len(path_to_append) > 21:
+            print('\nProject function not found. Edit path in main_straight_fiber.py or check PYTHONPATH')
+            sys.exit()
 
 try:
     from matplotlib import rc

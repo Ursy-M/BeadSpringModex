@@ -16,7 +16,7 @@ stiffness_parameter                 2.0
 contact_distance_factor             1.1
 
 # set computation time
-n_settling_time                     500
+n_settling_time                     1000
 n_steps_per_unit_time               30
 initial_step                        0
 n_save                              1
