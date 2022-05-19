@@ -9,7 +9,7 @@ import sys
 import numpy as np
 import os
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
@@ -76,7 +76,7 @@ directory = current_directory + '/' + path + '/'
 
 # set some entries
 # fiber bead radius 
-a = 1e-03                                              
+a = 1e-3                                              
 # number of fiber beads                                                    
 Nb = 50
 # length                                 
