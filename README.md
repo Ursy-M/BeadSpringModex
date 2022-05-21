@@ -8,6 +8,7 @@ This package is inspired from the [RigidMultiblobsWall](https://github.com/stoch
 
 ### References
 For the theory behind, see:
+
 [1] E. Gauger and H. Stark, Numerical study of a microscopic artifial swimmer. Physical Review E 74, 021907 (2006).   
 [2] F. B. Usabiaga, B. Kallemov, B. Delmotte, A.P.S Bhalla, B. E. Griffith, and A. Donev, Hydrodynamics of suspensions
 of passive and active rigid particles : a rigid multiblob approach, Communications in applied mathematics and
