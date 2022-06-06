@@ -28,6 +28,16 @@ computional science 11, 217 (2016), arXiv: 1602.02170.
 * **visit/**:
 
 ### Usage
+The package is implemented in python (version 3.x), so there is no need to compile it. However, we provide functions to
+compute the mobility matrix **M** and the matrix vector product **MF** with respectively _numba_ and _pycuda_. All you
+need is to have the package _numba_ installed in your python environment and a GPU compatible with CUDA to use the
+_pycuda_ implementation.
+
+We now explain how to run an example on a deformation of a flexible fiber settling in a viscous fluid. First, move to
+the directory 'multi-fibers/' and run the code as follows
+
+'python main_multi_fibers.py --input-file inputfile.dat'
+
 
 
 
