@@ -36,12 +36,9 @@ _pycuda_ implementation.
 We now explain how to run an example on a deformation of a flexible fiber settling in a viscous fluid. First, move to
 the directory 'multi-fibers/' and run the code as follows
 
----
----
+```
 python main_multi_fibers.py --input-file inputfile.dat
----
----
-
+```
 
 ### Contact
 Please contact Ursy Makanga (ursy.makanga@polytechnique.edu) for any problems or suggestions regarding this package. 
