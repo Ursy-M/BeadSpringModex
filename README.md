@@ -37,9 +37,10 @@ We now explain how to run an example on a deformation of a flexible fiber settli
 the directory 'multi-fibers/' and run the code as follows
 
 ---
+---
 python main_multi_fibers.py --input-file inputfile.dat
 ---
-
+---
 
 
 ### Contact
