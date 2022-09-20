@@ -13,7 +13,8 @@ For the theory behind, see:
 [2] F. B. Usabiaga, B. Kallemov, B. Delmotte, A.P.S Bhalla, B. E. Griffith, and A. Donev, Hydrodynamics of suspensions
 of passive and active rigid particles : a rigid multiblob approach, Communications in applied mathematics and
 computional science 11, 217 (2016), arXiv: 1602.02170.  
-[3]
+[3] U. Makanga, M. Sepahi, C. Duprat, B. Delmotte, Obstacle-induced lateral dispersion and nontrivial trapping of
+flexible fibers settling in a viscous fluid, _under preparation_ (2022).  
 
 ### Organization
 * **configuration/**: it contains generated .vertex and .clones files to run examples.
