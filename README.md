@@ -23,8 +23,7 @@ flexible fibers settling in a viscous fluid, _under preparation_ (2022).
 * **force/**: it contains functions to compute external and internal elastic forces, see [1], [2] and [4]. 
 * **generate_vertex_and_clone_files/**: it contains main files to generate .vertex and .clones files.
 * **integrator/**: it contains the solver and the scheme to integrate the equation of motion.
-* **mobility/**: it contains functions to compute the mobility matrix **M** and the product **MF** respectively via  CPU
-* (accelerated with numba) and GPU, see [3] and [4].
+* **mobility/**: it contains functions to compute the mobility matrix **M** and the product **MF** respectively via  CPU (accelerated with numba) and GPU, see [3] and [4].
 * **multi_fibers/**: it contains main files to run multi-fibers simulations, currently adapted in the case of  sedimentation at low Reynolds number.
 * **quaternion/**: it contains the class to handle quaternions.
 * **read_input/**: it contains the class to read input data.
