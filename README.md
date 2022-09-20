@@ -9,11 +9,12 @@ This package is inspired from the [RigidMultiblobsWall](https://github.com/stoch
 ### References
 For the theory behind, see:
 
-[1] E. Gauger and H. Stark, Numerical study of a microscopic artificial swimmer. Physical Review E 74, 021907 (2006).   
-[2] F. B. Usabiaga, B. Kallemov, B. Delmotte, A.P.S Bhalla, B. E. Griffith, and A. Donev, Hydrodynamics of suspensions
+[1] U. Makanga, Simulating transport and clogging of elastic fibers in structured environments. M.Sc. Thesis (2020)
+[2] E. Gauger and H. Stark, Numerical study of a microscopic artificial swimmer. Physical Review E 74, 021907 (2006).   
+[3] F. B. Usabiaga, B. Kallemov, B. Delmotte, A.P.S Bhalla, B. E. Griffith, and A. Donev, Hydrodynamics of suspensions
 of passive and active rigid particles : a rigid multiblob approach, Communications in applied mathematics and
 computional science 11, 217 (2016), arXiv: 1602.02170.  
-[3] U. Makanga, M. Sepahi, C. Duprat, B. Delmotte, Obstacle-induced lateral dispersion and nontrivial trapping of
+[4] U. Makanga, M. Sepahi, C. Duprat, and B. Delmotte, Obstacle-induced lateral dispersion and nontrivial trapping of
 flexible fibers settling in a viscous fluid, _under preparation_ (2022).  
 
 ### Organization
@@ -38,6 +39,7 @@ We now explain how to run an example on a deformation of a flexible fiber settli
 the directory 'multi-fibers/' and run the code as follows
 
 ```
+mkdir output
 python main_multi_fibers.py --input-file inputfile.dat
 ```
 
