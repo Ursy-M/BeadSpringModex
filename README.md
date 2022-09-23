@@ -18,7 +18,7 @@ of passive and active rigid particles : a rigid multiblob approach, Communicatio
 computional science 11, 217 (2016), arXiv: 1602.02170.  
 
 [4] U. Makanga, M. Sepahi, C. Duprat, and B. Delmotte, Obstacle-induced lateral dispersion and nontrivial trapping of
-flexible fibers settling in a viscous fluid, _under preparation_ (2022).  
+flexible fibers settling in a viscous fluid (2022), [arXiv: 2209.10692](https://arxiv.org/abs/2209.10692).  
 
 ### Organization
 * **configuration/**: it contains generated .vertex and .clones files to run examples.
