@@ -9,7 +9,7 @@ import sys
 import numpy as np
 import os
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
@@ -19,7 +19,7 @@ try:
     from matplotlib import rc
     #rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
     ## for Palatino and other serif fonts use:
-    rc('font',**{'family':'serif','serif':['Times']})
+    rc('font',**{'family':'serif','serif':['Times New Roman']})
     rc('text', usetex=True)
 except ImportError:
     print('You don’t have a working LaTeX installation on your computer or the required files are not in your system environment variables.')
@@ -69,7 +69,7 @@ def set_axes_equal(ax):
 # =============================================================================
 # main
 # =============================================================================
-path = 'output'     
+path = 'output_soft_deformation'     
 current_directory = os.getcwd()
 directory = current_directory + '/' + path + '/'
 
