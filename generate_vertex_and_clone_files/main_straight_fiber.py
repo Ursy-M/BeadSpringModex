@@ -6,7 +6,7 @@ Small script  file to generate .vertex and .clone files for a straight fiber.
 import sys
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -30,7 +30,7 @@ try:
     from matplotlib import rc
     #rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
     ## for Palatino and other serif fonts use:
-    rc('font',**{'family':'serif','serif':['Times']})
+    rc('font',**{'family':'serif','serif':['Times New Roman']})
     rc('text', usetex=True)
 except ImportError:
     print('You don’t have a working LaTeX installation on your computer or the required files are not in your system environment variables.')
@@ -79,11 +79,11 @@ def set_axes_equal(ax):
 # main
 # =============================================================================
 # set entries
-a_bead_fiber = 1e-3
+a_bead_fiber = 1
 dist_factor = 2.0
 dist = dist_factor * a_bead_fiber
-number_of_beads_per_fiber = 50
-length = number_of_beads_per_fiber * dist
+number_of_beads_per_fiber = 20
+length = (number_of_beads_per_fiber - 1) * dist + 2*a_bead_fiber
 dz_between_fibers = 10 * a_bead_fiber
 n_fibers = 1
 
@@ -102,11 +102,14 @@ if n_fibers ==2:
 # set position and orientation (and define the center of mass at [0., 0., 0.])
 center_of_mass = [np.mean(coordinates[:,0]), np.mean(coordinates[:,1]), np.mean(coordinates[:,2])]
 center_of_mass = np.array(center_of_mass) 
-coordinates = coordinates - center_of_mass
+#coordinates = coordinates - center_of_mass
+# shift 
+coordinates[:,0] += 44
 
 # define the orientation
 ref_configuration = np.copy(coordinates)
-factor = 3/4
+#factor = 3/4
+factor = 2.0
 s = np.array([np.cos(factor*np.pi/2)])
 p = np.sin(factor*np.pi/2) * np.array([0., factor*np.pi, 0.]) / np.linalg.norm(np.array([0., factor*np.pi, 0.]))
 q = np.concatenate([s, p])
