@@ -1,7 +1,7 @@
 # BeadSpring model for flexible fibers in Stokes flow
 
-This package contains python codes to run a simulation of several fibers at low Reynolds number. The fiber is
-discretized as a serie of spherical beads connected by spring constraints. The motion of each bead in Stokes flow is
+This package contains python codes to perform simulations of multiple fibers at low Reynolds number. The fiber is
+discretized as a series of spherical beads connected by spring constraints. The motion of each bead in Stokes flow is
 given by the mobility relation, which relates the bead velocities to external forces applied on each bead.
 
 This package is inspired from the [RigidMultiblobsWall](https://github.com/stochasticHydroTools/RigidMultiblobsWall) organization.
@@ -18,7 +18,7 @@ of passive and active rigid particles : a rigid multiblob approach, Communicatio
 computional science 11, 217 (2016), arXiv: 1602.02170.  
 
 [4] U. Makanga, M. Sepahi, C. Duprat, and B. Delmotte, Obstacle-induced lateral dispersion and nontrivial trapping of
-flexible fibers settling in a viscous fluid (2022), [arXiv: 2209.10692](https://arxiv.org/abs/2209.10692).  
+flexible fibers settling in a viscous fluid (2023), Physical Review Fluids, 8(4):044303, [arXiv: 2209.10692](https://arxiv.org/abs/2209.10692).  
 
 ### Organization
 * **configuration/**: it contains generated .vertex and .clones files to run examples.
